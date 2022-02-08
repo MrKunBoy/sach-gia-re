@@ -40,7 +40,7 @@ class PostHomeController extends Controller
         }
 
 
-        return view('home.coupon.list',[
+        return view('home.post.list',[
             'title' => 'Danh sách bài viết',
             'menus' => $this->menuService->getAlls(),
             'product_new' => $this->productService->getNew4(),
@@ -60,7 +60,7 @@ class PostHomeController extends Controller
             $countWishList = 0;
         }
 
-        return view('home.coupon.post',[
+        return view('home.post.post',[
             'title' => $post->title,
             'menus' => $this->menuService->getAlls(),
             'product_new' => $this->productService->getNew4(),

@@ -33,4 +33,9 @@ class Product extends Model
         return $this->hasOne(Menu::class, 'id', 'menu_id')->withDefault(['name'=>'']);
 
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class,'product_id','id');
+    }
 }

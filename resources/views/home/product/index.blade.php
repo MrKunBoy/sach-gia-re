@@ -1,4 +1,3 @@
-
 @extends('main')
 @section('content')
 
@@ -45,11 +44,14 @@
                             <h3 class="product-header">{{$product->name}}</h3>
                             <div class="rating-summary fix mtb-10">
                                 <div class="rating">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star-o"></i>
-                                    <i class="fa fa-star-o"></i>
-                                    <i class="fa fa-star-o"></i>
+                                    @for ($i = 1; $i <= $total_rating; $i++)
+                                        <i class="fa fa-star"></i>
+                                    @endfor
+                                    @for ($i = 1; $i <= 5-$total_rating; $i++)
+                                         <i class="fa fa-star-o"></i>
+                                    @endfor
+
+                                    <p></p>
                                 </div>
 
                             </div>
@@ -66,7 +68,8 @@
 
                                 <div class="pro-actions">
                                     <div class="actions-primary">
-                                        <a href="{{$product->link}}" target="_blank" title="Tới nơi bán"> Tới nơi bán</a>
+                                        <a href="{{$product->link}}" target="_blank" title="Tới nơi bán"> Tới nơi bán rẻ
+                                            nhất</a>
                                     </div>
 
                                 </div>
@@ -79,12 +82,14 @@
                                         <span>So sánh</span>
                                     </a>
                                     @if(\Auth::guard('cus')->check())
-                                        <a title="Yêu thích" style="cursor: pointer" onclick="addWishLish('{{$product->id}}','{{\Auth::guard('cus')->user()->id}}','0','/them-yeu-thich')">
+                                        <a title="Yêu thích" style="cursor: pointer"
+                                           onclick="addWishLish('{{$product->id}}','{{\Auth::guard('cus')->user()->id}}','0','/them-yeu-thich')">
                                             <i class="lnr lnr-heart"></i>
                                             <span>Yêu thích</span>
                                         </a>
                                     @else
-                                        <a href="{{route('show-form-login')}}" onclick="alert('Bạn cần đăng nhập để tiếp tục')">
+                                        <a href="{{route('show-form-login')}}"
+                                           onclick="alert('Bạn cần đăng nhập để tiếp tục')">
                                             <i class="lnr lnr-heart"></i>
                                             <span>Yêu thích</span>
                                         </a>
@@ -93,7 +98,7 @@
                             </div>
 
                             <div class="socila-sharing mt-25">
-                                <span>Ngày cập nhật: {{$product->updated_at}}</span>
+                                <span>Ngày cập nhật: {{date_format($product->updated_at,'d-m-Y')}}</span>
                             </div>
                         </div>
                     </div>
@@ -111,61 +116,66 @@
             <div class="row">
                 <div class="col-sm-12">
                     <ul class="main-thumb-desc nav tabs-area" role="tablist">
-                        <li><a class="active" data-toggle="tab" href="#sosanh">So sánh giá</a></li>
+                        <li><a id="sosanhgia" data-toggle="tab" href="#sosanh">So sánh giá</a></li>
                         <li><a data-toggle="tab" href="#description">Mô tả</a></li>
                         <li><a data-toggle="tab" href="#detail">Thông tin chi tiết</a></li>
-                        <li><a data-toggle="tab" href="#coments">Bình luận</a></li>
+                        <li><a class="active" id="binhluan" data-toggle="tab" href="#tabcoments">Bình luận</a></li>
                     </ul>
                     <!-- Product Thumbnail Tab Content Start -->
                     <div class="tab-content thumb-content border-default">
-                        <div id="sosanh" class="tab-pane fade show active">
+                        <div id="sosanh" class="tab-pane fade">
                             @foreach($locations as $location)
-                            <div class="row compare-item">
-                                <div class="col-lg-2">
+                                <div class="row compare-item">
+                                    <div class="col-lg-2">
 
-                                    <a class="compare-merchant" href="{{$location->link}}" target="_blank">
+                                        <a class="compare-merchant" href="{{$location->link}}" target="_blank">
                                         <span class="compare-logo">
                                             @if($location->domain == 'vinabook.com')
-                                                <img width="110px" class="lazyload" src="/frontend/img/shop/vinabook.png">
+                                                <img width="110px" class="lazyload"
+                                                     src="/frontend/img/shop/vinabook.png">
                                             @elseif($location->domain == 'salabookz.com')
-                                                <img width="110px" class="lazyload" src="/frontend/img/shop/salabook.png">
+                                                <img width="110px" class="lazyload"
+                                                     src="/frontend/img/shop/salabook.png">
                                             @else
                                                 <img width="110px" class="lazyload" src="/frontend/img/shop/fahasa.jpg">
                                             @endif
                                         </span>
-                                        <span>{{$location->domain}}</span>
-                                    </a>
+                                            <span>{{$location->domain}}</span>
+                                        </a>
 
-
-                                </div>
-                                <div class="col-lg-10">
-                                    <div class="compare-item-wrap">
-                                        <div class="compare-item-container">
-                                            <div class="compare-info">
-                                                <h3 class="compare-product-title">
-                                                    <a class="store-item is-trusted" href="{{$location->link}}" target="_blank">{{$location->name}}</a>
-                                                </h3>
-                                                <div>Ngày cập nhật: {{$location->updated_at}}</div>
-                                            </div>
-                                            <div class="compare-market">
-                                                <p><span class="price">
-                                                {{number_format($location->price_sale)}} ₫
-                                            </span>
-                                                    <del class="prev-price">
-                                                        {{number_format($location->price)}} ₫
-                                                    </del>
-                                                </p>
-                                            </div>
-                                            <div class="compare-button">
-                                                <a class="compare-product-view" href="{{$location->link}}" target="_blank" >
-                                                    Tới nơi bán
-                                                </a>
-                                            </div>
-                                        </div>
 
                                     </div>
+                                    <div class="col-lg-10">
+                                        <div class="compare-item-wrap">
+                                            <div class="compare-item-container">
+                                                <div class="compare-info">
+                                                    <h3 class="compare-product-title">
+                                                        <a class="store-item is-trusted" href="{{$location->link}}"
+                                                           target="_blank">{{$location->name}}</a>
+                                                    </h3>
+                                                    <div>Ngày cập
+                                                        nhật: {{date_format($location->updated_at,'d-m-Y')}}</div>
+                                                </div>
+                                                <div class="compare-market">
+                                                    <p><span class="price">
+                                                {{number_format($location->price_sale)}} ₫
+                                            </span>
+                                                        <del class="prev-price">
+                                                            {{number_format($location->price)}} ₫
+                                                        </del>
+                                                    </p>
+                                                </div>
+                                                <div class="compare-button">
+                                                    <a class="compare-product-view" href="{{$location->link}}"
+                                                       target="_blank">
+                                                        Tới nơi bán
+                                                    </a>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
                             @endforeach
                         </div>
                         <div id="description" class="tab-pane fade">
@@ -176,107 +186,152 @@
 
                             {!! $product->details !!}
                         </div>
-                        <div id="coments" class="tab-pane fade">
+                        <div id="tabcoments" class="tab-pane fade show active">
                             <!-- Reviews Start -->
-                            <div class="review border-default universal-padding">
-                                <div class="group-title">
-                                    <h2>customer review</h2>
+                            <div class="row">
+                                <!-- Reviews Start -->
+                                <div class="col-lg-5 review border-default universal-padding">
+                                    {{--                                    <form action="">--}}
+                                    <h2 class="review-title mb-30">Viết bình luận</h2>
+                                    <ul class="review-list">
+                                        <!-- Single Review List Start -->
+                                        <li>
+                                            <span style="font-size: 15px">Đánh giá sao</span>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </li>
+                                        <!-- Single Review List End -->
+
+                                    </ul>
+                                    <!-- Reviews Field Start -->
+                                    <div class="riview-field mt-20 mb-10">
+                                        <input type="hidden" name="id_product" value="{{$product->id}}">
+                                        @if(\Auth::guard('cus')->check())
+                                            <div class="form-group">
+                                                <label class="req" for="comments">Nội dung đánh giá</label>
+                                                <textarea name="content-comment" class="content-comment form-control"
+                                                          rows="5" id="comments"
+                                                          required="required"></textarea>
+                                            </div>
+                                            <button type="submit"
+                                                    onclick="addComment('{{$product->id}}','{{\Auth::guard('cus')->user()->id}}','/add-comment')"
+                                                    class="customer-btn">Gửi đánh giá
+                                            </button>
+                                        @else
+                                            <div class="form-group">
+                                                <label class="req" for="comments">Nội dung đánh giá</label>
+                                                <textarea class="form-control" rows="5" id="comments"></textarea>
+                                            </div>
+                                            <input class="btn-submit-comment-unactive" disabled="disabled" type="submit"
+                                                   value="Gửi đánh giá" class="customer-btn">
+                                        @endif
+                                    </div>
+                                    <!-- Reviews Field Start -->
+                                    {{--                                    </form>--}}
                                 </div>
-                                <h4 class="review-mini-title">Truemart</h4>
-                                <ul class="review-list">
-                                    <!-- Single Review List Start -->
-                                    <li>
-                                        <span>Quality</span>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star-o"></i>
-                                        <i class="fa fa-star-o"></i>
-                                        <label>Truemart</label>
-                                    </li>
-                                    <!-- Single Review List End -->
-                                    <!-- Single Review List Start -->
-                                    <li>
-                                        <span>price</span>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star-o"></i>
-                                        <i class="fa fa-star-o"></i>
-                                        <i class="fa fa-star-o"></i>
-                                        <label>Review by <a href="https://themeforest.net/user/hastech">Truemart</a></label>
-                                    </li>
-                                    <!-- Single Review List End -->
-                                    <!-- Single Review List Start -->
-                                    <li>
-                                        <span>value</span>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star-o"></i>
-                                        <label>Posted on 7/20/18</label>
-                                    </li>
-                                    <!-- Single Review List End -->
-                                </ul>
-                            </div>
-                            <!-- Reviews End -->
-                            <!-- Reviews Start -->
-                            <div class="review border-default universal-padding mt-30">
-                                <h2 class="review-title mb-30">You're reviewing: <br><span>Faded Short Sleeves T-shirt</span></h2>
-                                <p class="review-mini-title">your rating</p>
-                                <ul class="review-list">
-                                    <!-- Single Review List Start -->
-                                    <li>
-                                        <span>Quality</span>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star-o"></i>
-                                        <i class="fa fa-star-o"></i>
-                                    </li>
-                                    <!-- Single Review List End -->
-                                    <!-- Single Review List Start -->
-                                    <li>
-                                        <span>price</span>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star-o"></i>
-                                        <i class="fa fa-star-o"></i>
-                                        <i class="fa fa-star-o"></i>
-                                    </li>
-                                    <!-- Single Review List End -->
-                                    <!-- Single Review List Start -->
-                                    <li>
-                                        <span>value</span>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star-o"></i>
-                                    </li>
-                                    <!-- Single Review List End -->
-                                </ul>
-                                <!-- Reviews Field Start -->
-                                <div class="riview-field mt-40">
-                                    <form autocomplete="off" action="#">
-                                        <div class="form-group">
-                                            <label class="req" for="sure-name">Nickname</label>
-                                            <input type="text" class="form-control" id="sure-name" required="required">
+                                <!-- Reviews End -->
+                                <div class="col-lg-7 review border-default universal-padding">
+                                    <div class="group-title">
+                                        <h2>Nhận xét</h2>
+                                    </div>
+                                    @foreach($comments as $key => $comment)
+                                        <div class="pt-10 row compare-item">
+                                            <div class="col-lg-1">
+                                                <a class="compare-merchant" href="#" target="_blank">
+                                                    <span class="compare-logo">
+                                                        @if($comment->customer->thumb == null)
+                                                        <img width="50px" class="rounded-circle"
+                                                             src="/frontend/img/logo/avatar7.png">
+                                                        @else
+                                                            <img width="50px" class="rounded-circle"
+                                                                 src="{{$comment->customer->thumb}}">
+                                                        @endif
+                                                    </span>
+                                                </a>
+                                            </div>
+                                            <div class="col-lg-11">
+                                                <div class="compare-item-wrap">
+                                                    <div class="m-0 compare-item-container">
+                                                        <div class="m-0 compare-info"
+                                                             style="flex: initial; max-width: 100%;">
+                                                            <h3 class="mt-0 compare-product-title"
+                                                                style="font-size: 18px">
+                                                                <a class="store-item is-trusted" style="color: green">
+                                                                    {{$comment->customer->email}}
+                                                                </a>
+                                                            </h3>
+                                                            <div class="d-flex">
+                                                                <span class="mr-20"
+                                                                      style="font-style: italic">{{date_format($comment->created_at,'d-m-Y') }}</span>
+                                                                <ul class="review-list">
+                                                                    <!-- Single Review List Start -->
+                                                                    <li>
+                                                                        <i class="fa fa-star"></i>
+                                                                        <i class="fa fa-star"></i>
+                                                                        <i class="fa fa-star"></i>
+                                                                        <i class="fa fa-star"></i>
+                                                                        <i class="fa fa-star-o"></i>
+                                                                    </li>
+                                                                    <!-- Single Review List End -->
+                                                                </ul>
+                                                            </div>
+                                                            <div style="font-size: 16px">{{$comment->content}}</div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="req" for="subject">Summary</label>
-                                            <input type="text" class="form-control" id="subject" required="required">
+                                    @foreach($comment_reply as $key1 => $comment_rep)
+                                        @if($comment_rep->comment_parent_id == $comment->id)
+                                        <div class="comamin-reply-admin pt-10 row compare-item">
+                                            <div class="col-lg-1">
+                                                <a class="compare-merchant" href="#" target="_blank">
+                                                    <span class="compare-logo">
+{{--                                                        @if($comment->customer->thumb == null)--}}
+                                                            <img width="50px" class="rounded-circle"
+                                                                 src="{{$comment_rep->customer->thumb}}">
+{{--                                                        else--}}
+{{--                                                            <img width="50px" class="rounded-circle"--}}
+{{--                                                                 src="{{$comment->customer->thumb}}">--}}
+{{--                                                        @endif@--}}
+                                                    </span>
+                                                </a>
+                                            </div>
+                                            <div class="col-lg-11">
+                                                <div class="compare-item-wrap">
+                                                    <div class="m-0 compare-item-container">
+                                                        <div class="m-0 compare-info"
+                                                             style="flex: initial; max-width: 100%;">
+                                                            <h3 class="mt-0 compare-product-title"
+                                                                style="font-size: 18px">
+                                                                <a class="store-item is-trusted" style="color: green">
+                                                                    @Admin
+                                                                </a>
+                                                            </h3>
+                                                            <div class="d-flex">
+                                                                <span class="mr-20"
+                                                                      style="font-style: italic">{{date_format($comment_rep->created_at,'d-m-Y') }}</span>
+                                                            </div>
+                                                            <div style="font-size: 16px">{{$comment_rep->content}}</div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="req" for="comments">Review</label>
-                                            <textarea class="form-control" rows="5" id="comments" required="required"></textarea>
-                                        </div>
-                                        <button type="submit" class="customer-btn">Submit Review</button>
-                                    </form>
+                                            @endif
+                                        @endforeach
+                                    @endforeach
                                 </div>
-                                <!-- Reviews Field Start -->
+                                <!-- Reviews End -->
+
                             </div>
-                            <!-- Reviews End -->
                         </div>
                     </div>
                     <!-- Product Thumbnail Tab Content End -->
@@ -292,7 +347,7 @@
         <div class="container">
             <!-- Product Title Start -->
             <div class="post-title pb-30">
-                <h2>Sách  liên quan</h2>
+                <h2>Sách liên quan</h2>
             </div>
             <!-- Product Title End -->
             <!-- Hot Deal Product Activation Start -->
@@ -307,7 +362,8 @@
 
                             </a>
                             <!-- <div class="countdown" data-countdown="2020/03/01"></div> -->
-                            <a href="#" class="quick_view" data-toggle="modal" data-target="#myModal" title="Quick View"><i
+                            <a href="#" class="quick_view" data-toggle="modal" data-target="#myModal"
+                               title="Quick View"><i
                                     class="lnr lnr-magnifier"></i></a>
                         </div>
                         <!-- Product Image End -->
@@ -317,15 +373,15 @@
                                 <h4><a href="#">{{$product->name}}</a></h4>
                                 @if($product->price_sale == 0)
                                     <p><span class="price">
-                                                {{number_format($product->price,0,',','.')}} ₫
-                                            </span>
+        {{number_format($product->price,0,',','.')}} ₫
+    </span>
                                         <del class="prev-price">
                                         </del>
                                     </p>
                                 @else
                                     <p><span class="price">
-                                                {{number_format($product->price_sale,0,',','.')}} ₫
-                                            </span>
+        {{number_format($product->price_sale,0,',','.')}} ₫
+    </span>
                                         <del class="prev-price">
                                             {{number_format($product->price,0,',','.')}} ₫
                                         </del>
@@ -335,18 +391,21 @@
                             </div>
                             <div class="pro-actions">
                                 <div class="actions-primary">
-                                    <a href="/san-pham/{{$product->id}}-{{$product->slug}}.html" title="So sánh giá"> So sánh giá</a>
+                                    <a href="/san-pham/{{$product->id}}-{{$product->slug}}.html" title="So sánh giá"> So
+                                        sánh giá</a>
                                 </div>
                                 <div class="actions-secondary">
                                     <a href="#" title="Compare"><i class="lnr lnr-sync"></i>
                                         <span>So sánh</span></a>
                                     @if(\Auth::guard('cus')->check())
-                                        <a title="Yêu thích" style="cursor: pointer" onclick="addWishLish('{{$product->id}}','{{\Auth::guard('cus')->user()->id}}','0','/them-yeu-thich')">
+                                        <a title="Yêu thích" style="cursor: pointer"
+                                           onclick="addWishLish('{{$product->id}}','{{\Auth::guard('cus')->user()->id}}','0','/them-yeu-thich')">
                                             <i class="lnr lnr-heart"></i>
                                             <span>Yêu thích</span>
                                         </a>
                                     @else
-                                        <a href="{{route('show-form-login')}}" onclick="alert('Bạn cần đăng nhập để tiếp tục')">
+                                        <a href="{{route('show-form-login')}}"
+                                           onclick="alert('Bạn cần đăng nhập để tiếp tục')">
                                             <i class="lnr lnr-heart"></i>
                                             <span>Yêu thích</span>
                                         </a>
@@ -358,7 +417,7 @@
                         <span class="sticker-new">new</span>
                     </div>
             @endforeach
-                <!-- Single Product End -->
+            <!-- Single Product End -->
 
             </div>
             <!-- Hot Deal Product Active End -->

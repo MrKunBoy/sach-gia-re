@@ -2,6 +2,7 @@
 
 namespace App\Http\Services\Shop;
 
+use App\Models\Menu;
 use App\Models\Shop;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
@@ -15,7 +16,31 @@ class ShopService
         return Shop::select('id','name','slug')->where('active', 1)->where('active_home', 1)->take(8)->get();
     }
 
+    public function getShopAll()
+    {
+        return Shop::select('id','name','slug')->where('active', 1)->get();
+    }
 
+    public function getShopPageHome()
+    {
+        return Shop::select('id','name','slug','thumb')->where('active', 1)->paginate(24);
+    }
+
+    public function getID($id)
+    {
+        return Shop::where('id', $id)->where('active', 1)->firstOrFail();
+    }
+    public function getCoupon($shop)
+    {
+        return $shop->coupons()->where('active',1)
+            ->orderByRaw('id DESC')
+            ->paginate(20);
+    }
+    public function getCouponSortBy($shop,$sort_by){
+        return $shop->coupons()->where('active',1)
+            ->orderByRaw('id DESC')
+            ->paginate(20);
+    }
 
 
     public function getListPage()

@@ -114,44 +114,44 @@
                     <!-- Brand Banner Start -->
                     <div class="brand-banner owl-carousel">
                         <div class="single-brand">
-                            <a href="/tiki"><img class="img_topma img" src="/frontend/img/top_ma/ma-giam-gia-tiki.png"
+                            <a href="/shops/2-cua-hang-tiki.html"><img class="img_topma img" src="/frontend/img/top_ma/ma-giam-gia-tiki.png"
                                              alt="brand-image"></a>
-                            <a href="/shopee"><img class="img_topma img" src="/frontend/img/top_ma/ma-giam-gia-shopee.png"
+                            <a href="/shops/1-cua-hang-shopee.html"><img class="img_topma img" src="/frontend/img/top_ma/ma-giam-gia-shopee.png"
                                              alt="brand-image"></a>
-                            <a href="/lazada"><img class="img_topma img" src="/frontend/img/top_ma/ma-giam-gia-lazada-vietnam.png"
+                            <a href="/shops/3-cua-hang-lazada.html"><img class="img_topma img" src="/frontend/img/top_ma/ma-giam-gia-lazada-vietnam.png"
                                              alt="brand-image"></a>
                         </div>
                         <div class="single-brand">
-                            <a href="/adayroi"><img class="img_topma img" src="/frontend/img/top_ma/ma-giam-gia-adayroi.png"
+                            <a href="/shops/6-cua-hang-fahasa.html"><img class="img_topma img" src="/frontend/img/top_ma/ma-giam-gia-adayroi.png"
                                              alt="img_topma brand-image"></a>
-                            <a href="/aeoneshop"><img class="img_topma img" src="/frontend/img/top_ma/ma-giam-gia-aeoneshop.png"
+                            <a href="/shops/12-cua-hang-aeoneshop.html"><img class="img_topma img" src="/frontend/img/top_ma/ma-giam-gia-aeoneshop.png"
                                              alt="brand-image"></a>
-                            <a href="/yes24"><img class="img_topma img" src="/frontend/img/top_ma/ma-giam-gia-yes24-vietnam.png"
-                                             alt="brand-image"></a>
-                        </div>
-                        <div class="single-brand">
-                            <a href="/bach-hoa-xanh"><img class="img_topma img" src="/frontend/img/top_ma/Ma-giam-gia-BachHoaXanh.png"
-                                             alt="brand-image"></a>
-                            <a href="/bigc"><img class="img_topma img" src="/frontend/img/top_ma/Ma-giam-gia-BigC.png"
-                                             alt="brand-image"></a>
-                            <a href="/drinkies"><img class="img_topma img" src="/frontend/img/top_ma/ma-giam-gia-drinkies.png"
+                            <a href="/shops/11-cua-hang-yes24.html"><img class="img_topma img" src="/frontend/img/top_ma/ma-giam-gia-yes24-vietnam.png"
                                              alt="brand-image"></a>
                         </div>
                         <div class="single-brand">
-                            <a href="/shopeefood"><img class="img_topma img"
-                                             src="/frontend/img/top_ma/1629358164-ma-giam-gia-shopeefood.png"
+                            <a href="/shops/9-cua-hang-airbnb.html"><img class="img_topma img" src="/frontend/img/top_ma/airbnb-200x100.png"
                                              alt="brand-image"></a>
-                            <a href="/loship"><img class="img_topma img" src="/frontend/img/top_ma/ma-giam-gia-loship.png"
+                            <a href="/shops/10-cua-hang-fpt-shop.html"><img class="img_topma img" src="/frontend/img/top_ma/fpt-shop-200x100.png"
                                              alt="brand-image"></a>
-                            <a href="/lotte"><img class="img_topma img" src="/frontend/img/top_ma/ma-giam-gia-lotte.png"
+                            <a href="/shops/13-cua-hang-cellphones.html"><img class="img_topma img" src="/frontend/img/top_ma/cellphones-200x100.png"
                                              alt="brand-image"></a>
                         </div>
                         <div class="single-brand">
-                            <a href="/vua-bia"><img class="img_topma img" src="/frontend/img/top_ma/ma-giam-gia-vuabia.png"
+                            <a href="/shops/14/cua-hang-fado.html"><img class="img_topma img"
+                                             src="/frontend/img/top_ma/logo-fado-200x100.png"
                                              alt="brand-image"></a>
-                            <a href="/smile-nuts"><img class="img_topma img" src="/frontend/img/top_ma/ma-giam-gia-smile-nuts.jpg"
+                            <a href="/shops/15/cua-hang-vietravel.html"><img class="img_topma img" src="/frontend/img/top_ma/vietravel-200x100.png"
                                              alt="brand-image"></a>
-                            <a href="/econare"><img class="img_topma img" src="/frontend/img/top_ma/Ma-giam-gia-Ecocare.png"
+                            <a href="/shops/16-cua-hang-the-face-shop.html"><img class="img_topma img" src="/frontend/img/top_ma/the-face-shop-200x100.png"
+                                             alt="brand-image"></a>
+                        </div>
+                        <div class="single-brand">
+                            <a href="/shops/18-cua-hang-vua-bia.html"><img class="img_topma img" src="/frontend/img/top_ma/ma-giam-gia-vuabia.png"
+                                             alt="brand-image"></a>
+                            <a href="/shops/17-cua-hang-agoda.html"><img class="img_topma img" src="/frontend/img/top_ma/agoda-200x100.png"
+                                             alt="brand-image"></a>
+                            <a href="/shops/19-cua-hang-shop-vnexpress.html"><img class="img_topma img" src="/frontend/img/top_ma/shop-vnexpress-200x100.png"
                                              alt="brand-image"></a>
                         </div>
                     </div>
@@ -279,7 +279,7 @@
             <div class="main-product-tab-area">
                 <div class="tab-menu mb-15">
                     <div class="section-ttitle">
-                        <h2>Mã khuyến mãi</h2>
+                        <h2>Mã giảm giá</h2>
                     </div>
                     <!-- Nav tabs -->
                     <ul class="nav tabs-area" role="tablist">
@@ -315,11 +315,12 @@
                                 <div class="coupon-bottom pro-content">
                                     <div class="">
                                         <div class="coupon-primary actions-primary">
-                                            <a href="#" title="Lấy mã"> Lấy mã</a>
+                                            <a style="cursor: pointer; color: #ffffff" onclick="copyCode('{{$coupon->coupon_code}}')"> Lấy mã</a>
                                         </div>
                                         <div class="coupon-secondary actions-secondary">
-                                            <a class="coupon-add-far" href="#" title="Compare"><i
-                                                    class="lnr lnr-sync"></i> <span>So sánh</span></a>
+                                            <a class="coupon-add-far" href="{{$coupon->link}}" title="Chi tiết"
+                                               target="_blank"><i class="lnr lnr-location"></i>
+                                                <span>Chi tiết</span></a>
                                             @if(\Auth::guard('cus')->check())
                                                 <a class="coupon-add-far" title="Yêu thích" style="cursor: pointer" onclick="addWishLish('0','{{\Auth::guard('cus')->user()->id}}','{{$coupon->id}}','/them-yeu-thich')">
                                                     <i class="lnr lnr-heart"></i>

@@ -52,3 +52,19 @@
     width: auto;
     margin: 20px 20px 0 20px;
 }
+
+/*reply comment*/
+.list-rep{
+    padding: 0;
+}
+
+.list-rep li{
+    list-style-type: decimal;
+    color: #0956a4;
+    margin: 0px 0 0px 20px;
+}
+
+.list-rep p {
+    color: #ccc;
+    margin-bottom: 0;
+}

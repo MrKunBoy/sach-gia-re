@@ -18,6 +18,7 @@ class CouponService
 
 
 
+
     public function getShop()
     {
         return Shop::where('active',1)->orderByRaw('id DESC')->get();

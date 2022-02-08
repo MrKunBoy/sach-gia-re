@@ -86,15 +86,40 @@ function removeRow(id, url)
     }
 }
 
-// function add_compare(product_id){
-//     document.getElementById('title-compane').innerText = 'Chỉ cho phép so sánh tối đa 3 sách';
-//     var id = product_id;
-//     var name = document.getElementById('wish_productname'+id).value;
-//     var price = document.getElementById('wish_productprice'+id).value;
-//     var price_sale = document.getElementById('wish_productprice_sale'+id).value;
-//     var image = document.getElementById('wish_productimage'+id).src;
-//     var url = document.getElementById('wish_producturl'+id).href;
-// }
+//add class active
+function addClass(ma) {
+    document.getElementById('dieukien_'+ma).className += " active";
+}
 
+function copyCode(code) {
+    prompt("Copy mã bên dưới để sử dụng. Sau khi copy, hệ thống sẽ tự chuyển bạn đến trang khuyến mãi:", code);
+    // window.open(link, '_blank');
+}
+
+function addComment(product_id,customer_id, url)
+{
+    var content = $('.content-comment').val();
+    $.ajax({
+        type: 'post',
+        datatype: 'JSON',
+        data: {
+            product_id: product_id,
+            customer_id: customer_id,
+            content_comment: content
+        },
+        url: url,
+        cache: false,
+        success: function (result) {
+            // alert(result);
+            if(result.error == false){
+                alert(result.message);
+                location.reload();
+
+            }else {
+                alert('Lỗi thêm bình luận. Mời thử lại');
+            }
+        }
+    });
+}
 
 

@@ -48,7 +48,7 @@
 
                         <!-- Product Top Start -->
                                             <div class="top-new mb-40">
-                                                <h3 class="sidebar-title">Mới nhất</h3>
+                                                <h3 class="sidebar-title">Sách Mới nhất</h3>
                                                 <div class="side-product-active owl-carousel">
                                                     <div class="side-pro-item">
                                                     @foreach($product_new as $product)
@@ -63,7 +63,7 @@
                                                         <!-- Product Content Start -->
                                                         <div class="pro-content">
                                                             <h4><a class="name-product-new" href="/san-pham/{{$product->id}}-{{$product->slug}}.html">{{$product->name}}</a></h4>
-                                                            <p><span class="price">{{number_format($product->price)}} ₫</span><del class="prev-price">{{number_format($product->price_sale)}} ₫</del></p>
+                                                            <p><span class="price">{{number_format($product->price_sale)}} ₫</span><del class="prev-price">{{number_format($product->price)}} ₫</del></p>
                                                         </div>
                                                         <!-- Product Content End -->
                                                     </div>

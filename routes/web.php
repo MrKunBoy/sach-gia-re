@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\MainController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\PostController;
@@ -7,12 +8,14 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\UploadController;
 use App\Http\Controllers\Admin\Users\LoginController;
+use App\Http\Controllers\Home\CouponHomeController;
 use App\Http\Controllers\Home\MainHomeController;
 use App\Http\Controllers\Crawler\CrawlerCateController;
 use App\Http\Controllers\Crawler\CrawlerPostController;
 use App\Http\Controllers\Crawler\CrawlerProductController;
 use App\Http\Controllers\Admin\ShopController;
 use App\Http\Controllers\Admin\CouponController;
+use App\Http\Controllers\Home\ShopHomeController;
 use App\Http\Controllers\Home\UploadHomeController;
 use App\Http\Controllers\Home\ProductHomeController;
 use App\Http\Controllers\Home\MenuHomeController;
@@ -57,7 +60,7 @@ Route::middleware(['auth'])->group(function (){
         });
 
         Route::prefix('coupon')->group(function () {
-            Route::get('/',[CrawlerCouponController::class,'index'])->name('get_crawler.coupon.index');
+            Route::get('/',[CrawlerCouponControllerB::class,'index'])->name('get_crawler.coupon.index');
         });
 
 
@@ -85,6 +88,15 @@ Route::middleware(['auth'])->group(function (){
             Route::get('edit/{product}',[ProductController::class,'show']);
             Route::post('edit/{product}',[ProductController::class,'update']);
             Route::DELETE('destroy',[ProductController::class,'destroy']);
+        });
+
+        #comment
+        Route::prefix('comments')->group(function () {
+            Route::get('list',[CommentController::class,'index'])->name('comment.list');
+            Route::get('duyet/{comment}',[CommentController::class,'duyet'])->name('comment.duyet');
+            Route::get('bo-duyet/{comment}',[CommentController::class,'boduyet'])->name('comment.boduyet');
+            Route::DELETE('destroy',[CommentController::class,'destroy']);
+            Route::post('reply-comment',[CommentController::class,'reply_comment']);
         });
 
         #upload
@@ -176,7 +188,10 @@ Route::post('/profile-edit/upload/services',[UploadHomeController::class,'upload
 Route::get('/danh-muc/{id}-{slug}.html',[MenuHomeController::class,'index']);
 
 #Chi tiết product
-Route::get('/san-pham/{id}-{slug}.html',[ProductHomeController::class,'index']);
+Route::get('/san-pham/{id}-{slug}.html',[ProductHomeController::class,'index'])->name('detail-product');
+#comment
+Route::post('/add-comment',[ProductHomeController::class,'comment']);
+
 
 #yeu thich
 Route::get('/wishlist',[WishlistController::class,'index'])->name('show-wishlist');
@@ -186,3 +201,11 @@ Route::post('/them-yeu-thich',[WishlistController::class,'add_wishlish']);
 #Bài viết
 Route::get('/posts',[PostHomeController::class,'index'])->name('show-posts');
 Route::get('/posts/{id}-{slug}.html',[PostHomeController::class,'show'])->name('show-detail-posts');
+
+#Mã khuyến mãi
+Route::get('/coupons',[CouponHomeController::class,'index'])->name('show-coupons');
+
+
+#Cửa hàng
+Route::get('/shops',[ShopHomeController::class,'index'])->name('show-shops');
+Route::get('/shops/{id}-{slug}.html',[ShopHomeController::class,'show'])->name('show-detail-shops');

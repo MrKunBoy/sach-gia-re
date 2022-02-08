@@ -22,4 +22,9 @@ class Shop extends Model
         'active_home',
         'active'
     ];
+
+    public function coupons()
+    {
+        return $this->hasMany(Coupon::class,'shop_id','id');
+    }
 }
